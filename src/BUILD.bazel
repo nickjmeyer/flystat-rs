@@ -1,0 +1,7 @@
+load("@rules_rust//rust:defs.bzl", "rust_test")
+
+rust_test(
+    name = "hello_world",
+    srcs = ["hello_world.rs"],
+    deps = ["@crates//:min_max_traits"],
+)
