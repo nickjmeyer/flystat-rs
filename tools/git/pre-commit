@@ -1,0 +1,9 @@
+#!/bin/bash
+
+./tools/git/rustfmt.sh
+
+if ! git diff --exit-code --quiet; then
+    echo "ERROR: Unstaged changes detected in the working directory."
+    echo "Please stage or discard these changes before committing."
+    exit 1
+fi
