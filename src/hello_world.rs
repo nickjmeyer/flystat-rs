@@ -1,5 +1,5 @@
-use std::cmp;
 use min_max_traits;
+use std::cmp;
 
 trait UpdateStat {
     type T;
@@ -7,45 +7,37 @@ trait UpdateStat {
 }
 
 #[derive(Copy, Clone)]
-struct MinStat<T>
-{
+struct MinStat<T> {
     value: T,
 }
 
 impl<T: min_max_traits::Max> Default for MinStat<T> {
     fn default() -> MinStat<T> {
-        MinStat {
-            value: T::MAX,
-        }
+        MinStat { value: T::MAX }
     }
 }
 
 impl<T: std::cmp::Ord + Copy> UpdateStat for MinStat<T> {
     type T = T;
-    fn update(&mut self, value: T)
-    {
+    fn update(&mut self, value: T) {
         self.value = cmp::min(self.value, value);
     }
 }
 
 #[derive(Copy, Clone)]
-struct MaxStat<T>
-{
+struct MaxStat<T> {
     value: T,
 }
 
 impl<T: min_max_traits::Max> Default for MaxStat<T> {
     fn default() -> MaxStat<T> {
-        MaxStat {
-            value: T::MAX,
-        }
+        MaxStat { value: T::MAX }
     }
 }
 
 impl<T: std::cmp::Ord + Copy> UpdateStat for MaxStat<T> {
     type T = T;
-    fn update(&mut self, value: T)
-    {
+    fn update(&mut self, value: T) {
         self.value = cmp::max(self.value, value);
     }
 }
